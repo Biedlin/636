@@ -1,6 +1,13 @@
 import java.text.DecimalFormat;
-import java.util.*;
-public class Main {
+import java.text.Format;
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ * @author silent 1183611386@qq.com
+ * @date 2019/4/9 20:03
+ */
+public class Q2 {
     public static void main(String...args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -12,21 +19,12 @@ public class Main {
         Arrays.sort(water);
         double sum;
 
-        if(water[0]<=(water[n]>>1)){
+        if(water[0]*2<=water[n]){
             // 以女生最小的杯子为基准
-            if(water[0]> w/n){
-                sum = w;
-            }else{
-                sum = 3*n*water[0];
-            }
-
+            sum = 3*n*water[0];
         }else{
             // 以男生最小的杯子为基准
-            if(water[n]/2.0 > w/n){
-                sum = w;
-            }else{
-                sum = (water[n]/2.0)*3*n;
-            }
+            sum = (water[n]/2.0)*3*n;
         }
         DecimalFormat format = new DecimalFormat("#0.000000");
         sum =sum>w?w:sum;
