@@ -1,35 +1,28 @@
-import java.text.DecimalFormat;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
 public class Main {
-    public static void main(String...args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int w = scanner.nextInt();
-        int[] water = new int[2*n];
-        for(int i =0;i<2*n;i++){
-            water[i] = scanner.nextInt();
+    public static void main(String...args) throws Exception{
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        int m = Integer.parseInt(br.readLine());
+        Set<String> set = new HashSet<String>();
+        for (int i = 0; i < m; i++) {
+            set.add(br.readLine());
         }
-        Arrays.sort(water);
-        double sum;
-
-        if(water[0]<=(water[n]>>1)){
-            // 以女生最小的杯子为基准
-            if(water[0]> w/n){
-                sum = w;
-            }else{
-                sum = 3*n*water[0];
-            }
-
-        }else{
-            // 以男生最小的杯子为基准
-            if(water[n]/2.0 > w/n){
-                sum = w;
-            }else{
-                sum = (water[n]/2.0)*3*n;
+        String T = br.readLine();
+        int result = 0;
+        int len = T.length();
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if(set.contains(T.substring(i, j))){
+                    result++;
+                    i = j;
+                    j = i;
+                }
             }
         }
-        DecimalFormat format = new DecimalFormat("#0.000000");
-        sum =sum>w?w:sum;
-        System.out.println(format.format(sum));
+        System.out.println(result);
     }
 }
